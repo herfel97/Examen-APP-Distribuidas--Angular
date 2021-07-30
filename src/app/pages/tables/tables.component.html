@@ -1,0 +1,154 @@
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Reservas</h4>
+          <div class="row">
+        <form [formGroup]="formulario" (ngSubmit)="submitForm()">
+          <div class="col">
+            <div class="form-group">
+              <label>Cedula</label>
+              <input type="text" class="form-control" formControlName="cedula"
+              onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+              maxlength="10"
+              oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
+            </div>
+            <div *ngIf = "formulario.get('cedula').errors && formulario.get('cedula').dirty"> 
+              <p *ngIf = "formulario.get('cedula').hasError('required')">Campo es requerido</p>
+              <p *ngIf = "formulario.get('cedula').hasError('minlength')">Cedula incompleta</p>
+            </div>
+
+          </div>
+          <div class="col">
+            <div class="form-group">
+            <input type="submit" class="btn btn-warning"  value="Buscar" />
+            </div>
+          </div>
+        </form>
+        </div>
+      
+      <!-- Oculto-->
+      <div *ngIf= "clienteBusq"> 
+        <strong>
+          <h3>Busque un cliente primero</h3>
+        </strong>
+      </div>
+
+      <div *ngIf="busquedaExitosa">
+        <h5>Cliente</h5>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input class="form-control" [(ngModel)]="nombreCliente" name="id" readonly /> 
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="form-group">
+              <label>Correo</label>
+              <input class="form-control" [(ngModel)]="correoCliente" readonly />
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="form-group">
+              <label>Telefono</label>
+              <input class="form-control" [(ngModel)]="telefonoCliente" readonly />
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col">
+          </div>
+          <div class="col">
+            <div class="form-group">          
+              <h3 class=" card-title">Realizar Reservacion </h3>
+          </div>
+          </div>
+          <div class="col">
+          </div>   
+        </div>
+
+        <div *ngIf= "restBusq"> 
+          <strong>
+            <h4>Busque un restaurante </h4>
+          </strong>
+
+          <form [formGroup]="formulario2" (ngSubmit)="submitForm2()" > 
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label>Nombre de Restaurant </label>
+                  <input class="form-control" formControlName="nombreRes" /> 
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <input class="btn btn-warning"type="submit" value="Buscar"/>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div *ngIf="restaurant">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label>Nombre</label>
+                  <input class="form-control" [(ngModel)]="nombreRes" name="id" readonly /> 
+                </div>
+              </div>
+              
+              <div class="col">
+                <div class="form-group">
+                  <label>Direccion</label>
+                  <input class="form-control" [(ngModel)]="direccionRes" readonly />
+                </div>
+              </div>
+            </div>
+          </div> 
+
+        </div>
+        <form [formGroup]="formulario3" >
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                Nro de Asistentes
+                <input class="form-control" type="text" formControlName="asistentes"/> 
+              </div>
+              <div *ngIf = "formulario3.get('asistentes').errors && formulario3.get('asistentes').dirty"> 
+                <p *ngIf = "formulario3.get('asistentes').hasError('required')">Campo es requerido</p>
+              </div>
+              <div class="col-sm">
+                Fecha
+                <input class="form-control" type="date"  formControlName="fecha" required/> 
+              
+              </div>
+              <div class="col-sm">
+                Hora
+                <input class="form-control" type="time" formControlName="hora" required/> 
+              </div>
+              <div class="col-sm">
+              </div>
+              <div class="col-sm">
+              </div>
+            </div>
+          </div>
+          <input type="button" class="btn btn-primary" [disabled]="formulario3.invalid" (click) = "saludar()" value="ENVIAR RESERVA">
+        </form>
+
+          
+    </div>
+<!-- Fin del div ocultar-->
+      
+
+
+  </div>
+
+    </div>
+  </div>
+</div>

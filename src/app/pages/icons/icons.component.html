@@ -1,0 +1,84 @@
+
+<div class=" content">
+  <h2>Restaurantes</h2>
+        <div class=" card-body">
+        <form [formGroup]="formulario" (ngSubmit)="submitForm(formulario.value)">
+          <div class="row">
+          <div class=" col">
+            <div class=" form-group">
+              <label> Nombre</label>
+              <input class=" form-control" type="text" value="" formControlName="nombre"> 
+            </div>
+            <div *ngIf = "formulario.get('nombre').errors && formulario.get('nombre').dirty"> 
+              <p *ngIf = "formulario.get('nombre').hasError('required')">Campo es requerido</p>
+            </div>
+
+          </div>
+          <div class=" col">
+            <div class=" form-group">
+              <label> Direccion </label>
+              <input class=" form-control" type="text" value="" formControlName="direccion"/>
+            </div>
+            <div *ngIf = "formulario.get('direccion').errors && formulario.get('direccion').dirty"> 
+              <p *ngIf = "formulario.get('direccion').hasError('required')">Campo es requerido</p>
+            </div>
+
+          </div>
+          <div class=" col">
+            <div class=" form-group">
+              <label> Telefono </label>
+              <input class=" form-control" type="text" value="" formControlName="telefono" 
+              onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+              maxlength="10"
+              oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
+            </div>
+            <div *ngIf = "formulario.get('telefono').errors && formulario.get('telefono').dirty"> 
+              <p *ngIf = "formulario.get('telefono').hasError('required')">Campo es requerido</p>
+              <p *ngIf = "formulario.get('telefono').hasError('minlength')">Campo incompleto</p>
+            </div>
+
+          </div>
+          <div class=" col">
+            <div class=" form-group">
+              <label> Aforo </label>
+              <input class=" form-control" type="text" value="" formControlName="aforo" 
+              onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+              maxlength="10"
+              oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
+            </div>
+            <div *ngIf = "formulario.get('aforo').errors && formulario.get('aforo').dirty"> 
+              <p *ngIf = "formulario.get('aforo').hasError('required')">Campo es requerido</p>
+            </div>
+          </div>
+          <div class=" col">
+            <div class=" form-group">
+              <button class="btn btn-danger btn-block btn-lg"  type="submit" 
+              [disabled]="formulario.invalid">Registrar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Nombre</th>
+                  <th>Direccion</th>
+                  <th>Telefono</th>
+                  <th>Aforo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let restaurante of restaurantes'>
+                  <td>{{restaurante.nombre}}</td>
+                  <td>{{restaurante.direccion}}</td>
+                  <td>{{restaurante.telefono}}</td>
+                  <td>{{restaurante.aforo}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>

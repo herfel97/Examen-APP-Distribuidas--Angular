@@ -1,0 +1,9 @@
+<div class="login" id="lgBox">
+    <form class="custom-form" #lgForm="ngForm" (ngSubmit)="loginSubmit(lgForm.value)">
+      <div class="loginRow"><h4 class="text-center">Login</h4></div>
+      <div class="loginRow"><input type="text" #username name="username" ngModel class="form-control" placeholder="Username" required /></div>
+      <div class="loginRow"><input type="password" #password name="password" ngModel class="form-control" placeholder="Password" required  /></div>
+      <div class="loginRow"><button class="btn btn-primary btn-block/">Login</button></div>
+    </form>
+  </div>
+  

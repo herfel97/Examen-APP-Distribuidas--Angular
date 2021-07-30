@@ -1,0 +1,106 @@
+
+<div class=" content">
+  <h2>Lista de Reservaciones</h2>
+    <h5>Clientes</h5>
+        <div class=" card-body">
+        <form [formGroup]="formulario" (ngSubmit)="submitForm()">
+          <div class="row">
+            <div class="col">
+              <label>Nro. de Cedula</label>
+              <br>
+              <input class="form-control" type="text" formControlName="cedula"
+              onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+              maxlength="10"
+              oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
+              <div *ngIf = "formulario.get('cedula').errors && formulario.get('cedula').dirty"> 
+                <p *ngIf = "formulario.get('cedula').hasError('minlength')">Cedula incompleta</p>
+              </div>
+              <div *ngIf = "noexiste"> 
+                <p>!!  Cliente no encontrado reintente la busqueda !!</p>
+              </div>
+
+
+              <br>
+              <input class="btn btn-primary" type="submit" value="Buscar">
+            
+            </div>
+            
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+      </form>
+
+      <br>
+      <br>
+
+      <!--Division IF-->
+      <div *ngIf="busquedaClie">
+        <div class="table-responsive">
+          <table class=" table tablesorter" id="">
+            <thead class=" text-primary">
+              <tr>
+                <th>Nombre</th>
+                <th>Restaurante</th>
+                <th>Asistentes</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let reser of reservas1'>
+                <td>{{reser.cliente}}</td>
+                <td>{{reser.restaurante}}</td>
+                <td>{{reser.asistentes}}</td>
+                <td>{{reser.fecha}}</td>
+                <td>{{reser.hora}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--Division IF-->
+
+      <h5>Restaurantes</h5>
+      <form [formGroup]="formulario2" (ngSubmit)="buscar()">
+        <div class="row">
+          <div class="col">
+            <label>Nombre</label>
+            <br>
+            <input class="form-control" type="text" formControlName="nombre">
+            <br>
+            <input class="btn btn-primary" type="submit" value="Buscar">
+          </div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+      <table class=" table tablesorter" id="">
+        <thead class=" text-primary">
+          <tr>
+            <th>Cliente</th>
+            <th>Asistentes</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let reser of reservas2'>
+            <td>{{reser.cliente}}</td>
+            <td>{{reser.asistentes}}</td>
+            <td>{{reser.fecha}}</td>
+            <td>{{reser.hora}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+        </div>
+      </div>
